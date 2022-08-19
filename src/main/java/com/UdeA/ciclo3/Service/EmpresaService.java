@@ -14,13 +14,13 @@ public class EmpresaService {
     EmpresaRepository empresaRepository;
 
 
-    public List<empresa>getAllEmpresa(){
-        List<empresa>empresaList = new ArrayList<>();
+    public List<empresa> getAllEmpresa() {
+        List<empresa> empresaList = new ArrayList<>();
         empresaRepository.findAll().forEach(empresa -> empresaList.add(empresa));
         return empresaList;
     }
 
-    public empresa terrasoftware(Integer id){
+    public empresa terrasoftware(Integer id) {
         return empresaRepository.findById(id).get();
 
     }
@@ -29,12 +29,22 @@ public class EmpresaService {
     // metodo para guardar o actualizar
     public boolean softwareterra(empresa terrasoftware) {
         empresa emp = empresaRepository.save(terrasoftware);
-        if (empresaRepository.findById(emp.getId())!=null){
+        if (empresaRepository.findById(emp.getId()) != null) {
 
             return true;
         }
         return false;
+    }
+    // metodo para eliminar empresaas registaradas con el id
 
+    public boolean eliminarempresa(Integer id) {
+        empresaRepository.deleteById(id);
+        if(terrasoftware(id)!= null){
+        return false;
+    }
+    return true;
     }
 
 }
+
+
